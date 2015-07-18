@@ -381,6 +381,7 @@ nav a#pull {
 }
 /*----*/
 .learn-button {
+	margin-top: 40px;
 	text-align: center;
 }
 /*----*/
@@ -388,7 +389,7 @@ nav a#pull {
 	padding: 0.8em 2em;
 	text-decoration: none;
 	border:none;
-	margin-top: 1em;
+	margin: 1em 10px 0 10px;
 	display: inline-block;
 	font-family: 'Lato', sans-serif;
 	color: #FFF;
@@ -403,7 +404,7 @@ nav a#pull {
 	-o-border-radius: 0.4em;
 	background: #00B09C;
 	font-weight: 300;
-	width:30%;
+	width:auto !important;
 }
 .slide-btn:hover{
 	background: #019F8D;

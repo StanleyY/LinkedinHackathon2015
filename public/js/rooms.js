@@ -77,10 +77,6 @@ console.log("** URL"  + $location.absUrl());
     restaurants[i].categoriesStr = categoriesStr;
 
   }
-
-
-
-
   $scope.restaurants = restaurants;
   $scope.loaded = true;
 
