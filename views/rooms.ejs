@@ -34,13 +34,14 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
     <title>Food Cheezus</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
-    <script src="../js/rooms.js"></script>
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <script src="/js/rooms.js"></script>
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="/bower_components/lumx/dist/lumx.css">
@@ -52,7 +53,7 @@
  -->
     <style>
       html {
-        background: url(../images/bg.jpg) no-repeat center center fixed;
+        background: url(/images/bg.jpg) no-repeat center center fixed;
         -webkit-background-size: cover;
         -moz-background-size: cover;
         -o-background-size: cover;
@@ -114,9 +115,10 @@
           <span class="fs-display-1 display-block tc-white-1" style="text-align: center;"> suggestions from food cheezus to you </span>
           <span class="fs-body display-block tc-white-2" style="text-align: center;"> food cheezus is always right </span>
           <br>
+            <span ng-hide="loaded" class="fs-title display-block tc-white-1" style="text-align: center;"> finding the best restaurants for you... </span>
 
             <div ng-repeat="restaurant in restaurants" flex-item>
-              <div class="card">
+              <div class="card ng-cloak">
                   <div flex-container="row">
                       <div class="card__img card__img--left" style="height: 160px">
                           <a href="{{restaurant.yelpUrl}}"><img src="{{restaurant.imgUrl}}"></a>
@@ -137,6 +139,7 @@
 
                                   <span> <span class="tc-red-900"><b> rating: </b></span> {{ restaurant.rating }} stars</span>
                                   <span class="tc-red-900"><b> address: </b></span> <span ng-repeat="addressLine in restaurant.address"> {{ addressLine }} </span>
+                                  <span> <span class="tc-red-900"><b> score: </b></span> {{ restaurant.score }} </span>
 
                               </div>
 
@@ -148,8 +151,6 @@
                       </div>
                   </div>
               </div>
-          }
-          }
           </div>
         </div>
 

@@ -51,9 +51,17 @@ var restaurants = [r4];
 // $.material.init()
 
 var app = angular.module('foodcheezus', ['lumx']).
-controller('rooms', function($scope) {
+controller('rooms', function($scope, $http, $location) {
   $scope.test = "MEEPEPPEP";
 
+console.log("** URL"  + $location.absUrl());
+
+  $scope.loaded = false;
+
+  var promise = $http.get("http://localhost:3000/test?number=329");
+  promise.success(function(data){
+    // console.log(data);
+    restaurants = data;
   for (var i = 0; i < restaurants.length; i++) {
     var priceStr = "";
     for (var j = 0; j < restaurants[i].price; j++) {
@@ -69,14 +77,10 @@ controller('rooms', function($scope) {
     restaurants[i].categoriesStr = categoriesStr;
 
   }
-
-
-
-
   $scope.restaurants = restaurants;
+  $scope.loaded = true;
 
-
-
+  });
 });
 
 function getLocation() {
