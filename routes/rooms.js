@@ -13,7 +13,16 @@ router.get('/:id', function(req, res, next) {
 	*/
 	res.render('preferences', {groupNumber: req.params.id});
 
-});;
+});
+
+router.get('/', function(req, res, next) {
+	Room.getRooms(function(rooms) {
+		res.render('rooms', {
+			rooms: rooms,
+			title: "Rooms"
+		})
+	})
+});
 
 router.post('/', function(req, res, next) {
 		var name = req.body.groupName;
