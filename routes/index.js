@@ -143,6 +143,11 @@ router.get('/test', function (req, res) {
       current.score += 50 * priceWeights[current.price];
       current.priceVotes = priceWeights[current.price];
     }
+    for (var i=0; i < restaurants.length; i++){
+      if (restaurants[i].categoriesVotes > roomData.members.length){
+        restaurants[i].categoriesVotes = roomData.members.length;
+      }
+    }
   }
   });
 });
