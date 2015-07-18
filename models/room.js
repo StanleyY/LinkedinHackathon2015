@@ -27,8 +27,18 @@ roomSchema.statics.getRoomByName = function(name, callback) {
     });
 };
 
-roomSchema.statics.addPreferences = function(name, username, cuisines, prices, callback) {
-    Room.findOne({name:name}, function(err, room) {
+roomSchema.statics.getRoomById = function(id, callback) {
+    Room.findOne({roomNumber: id}, function(err, room) {
+        if (err) {
+            callback({code: 500, err: 'Unknown error'});
+        } else if (room) {
+            callback({code: 200, data: room});
+        }
+    })
+};
+
+roomSchema.statics.addPreferences = function(id, username, cuisines, prices, callback) {
+    Room.findOne({roomNumber:id}, function(err, room) {
         if (err) {
             callback({code: 500, err: 'Unknown error'});
         } else if (room) {

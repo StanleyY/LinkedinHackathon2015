@@ -39,7 +39,7 @@ controller('preferences', function($scope, $http, $location) {
     "allergies":[],
     "prices": [],
     "name": "",
-    "roomNumber": $location.path()
+    "roomNumber": $('body').data('id')
   };
   console.log($scope.userPreferences);
   $scope.counter = 0;
@@ -59,12 +59,25 @@ controller('preferences', function($scope, $http, $location) {
         $scope.userPreferences["prices"].push(val.id);
       });
       console.log($scope.userPreferences);
+      /*
       $http.post('/postTest', $scope.userPreferences).
       success(function(data, status, headers, config) {
         console.log(data);
     }).
       error(function(data, status, headers, config) {
         console.log(data);
+      });
+      }
+*/
+
+      $.ajax({
+          url: '/rooms/' + $('body').data('id'),
+          type: "POST",
+          data: $scope.userPreferences,
+          dataType: "json",
+          success: function(response) {
+            window.location.href = "/rooms/"+$scope.userPreferences.roomNumber + "/info";
+          }
       });
     }
     else {

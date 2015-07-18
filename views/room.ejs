@@ -11,9 +11,25 @@
     <p>Welcome to <%= title %></p>
     <input data-room=<%= room.name %> id="cuisine-input" placeholder="Enter cuisine"></input>
     <button id="add-button">Add</button>
+
     <div id="cuisines">
+    <h1>Cuisines</h1>
       <% for (var i=0; i<room.cuisines.length; i++) { %>
         <div class="cuisine"><%= room.cuisines[i] %></div>
+      <% } %>
+    </div>
+
+    <div id="prices">
+    <h1>Prices</h1>
+      <% for (var i=0; i<room.prices.length; i++) { %>
+        <div class="price"><%= room.prices[i] %></div>
+      <% } %>
+    </div>
+
+    <div id="members">
+    <h1>Members</h1>
+      <% for (var i=0; i<room.members.length; i++) { %>
+        <div class="member"><%= room.members[i] %></div>
       <% } %>
     </div>
   </body>
