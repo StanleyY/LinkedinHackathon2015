@@ -3,12 +3,12 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var roomSchema = new Schema({
-    name: String,
     roomNumber: Number,
     cuisines: [String],
     prices: [],
     allergies: [],
-    members: []
+    members: [],
+    name: String
 });
 
 roomSchema.statics.getRooms = function(callback) {
