@@ -29,7 +29,7 @@ router.get('/preferences', function(req, res, next) {
 
 router.post('/postTest', function(req, res, next){
 	console.log(req.body);
-Room.findOne({ 'groupId' : "1234" }, function(err, room) {
+Room.findOne({ 'roomNumber' : "1234" }, function(err, room) {
 	if (!room) {
 		console.log("THERE IS NO ROOM");
 		var blah = new Room();
@@ -42,6 +42,12 @@ Room.findOne({ 'groupId' : "1234" }, function(err, room) {
 	}
 	else {
 		console.log("THERE IS A ROOM");
+		room.members.push(req.body.name);
+		room.cuisines.push(req.body.cuisines);
+		room.prices.push(req.body.prices);
+		room.allergies.push(req.body.allergies);
+		console.log(room);
+
 	}
 })
 });
@@ -51,8 +57,10 @@ Room.findOne({ 'groupId' : "1234" }, function(err, room) {
 // API CALLS
 router.get('/test', function (req, res) {
   console.log(req.query);
-  yelp.search(req.query, function(error, data) {
-      var cleaned = data.businesses.map(function(value) {
+  var query = req.query;
+
+  yelp.search(query, function(error, data) {
+      var restaurantsData = data.businesses.map(function(value) {
         var new_obj = {};
         new_obj.rating = value.rating;
         new_obj.name = value.name;
@@ -61,11 +69,42 @@ router.get('/test', function (req, res) {
         new_obj.categories = value.categories.map(function(value){
             return value[0];
         });
+        new_obj.score = 0;
+        new_obj.categoriesVotes = 0;
+        new_obj.priceVotes = 0;
         return new_obj;
       });
-      console.log(cleaned);
+      calculateScores(restaurantsData);
+      function scoreFn(a, b) {
+        if (a.score > b.score) {
+          return -1;
+        }
+        if (a.score < b.score) {
+          return 1;
+        }
+        return 0;
+      }
+      restaurantsData.sort(scoreFn);
+      console.log(restaurantsData);
   });
 
+  function calculateScores(restaurants) {
+    var categoriesWeights = {'Chinese': 4, 'Italian': 2, 'Greek': 1};
+    var priceWeights = [0,4,5,2,0];
+
+    for (var i=0; i < restaurants.length; i++) {
+      var current = restaurants[i]
+      for (var j = 0; j < current.categories.length; j++) {
+        var value = categoriesWeights[current.categories[j]];
+        if (value) {
+          current.score += 80 * value;
+          current.categoriesVotes += value;
+        }
+      }
+      current.score += 50 * priceWeights[current.price];
+      current.priceVotes = priceWeights[current.price];
+    }
+  }
   /*
   var parameters = {
         location: [37.752152, -122.419061], // Mission Street Coordinates

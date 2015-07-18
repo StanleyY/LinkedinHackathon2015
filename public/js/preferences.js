@@ -1,7 +1,7 @@
 var questions = [
-"Pick your favorite cuisines.",
-"Do you have any allergies?",
-"What's your price preference?"
+"What are you in the mood for?",
+"Do you have any food restrictions?",
+"What prices are you comfortable with?"
 
 
 ];
@@ -33,7 +33,6 @@ var answers = [[
 ]];
 var app = angular.module('foodcheezus', []).
 controller('preferences', function($scope, $http, $location) {
-  console.log($location.path());
   $scope.userPreferences = {
     "cuisines":[],
     "allergies":[],
@@ -46,6 +45,7 @@ controller('preferences', function($scope, $http, $location) {
   $scope.hasName = false;
   $scope.question = "What's your name?";
 
+  //Grab the user's chosen nickname
   $scope.grabName = function(){
     $scope.userPreferences["name"] = $("#nickName").val();
     $scope.hasName = true;
@@ -53,22 +53,12 @@ controller('preferences', function($scope, $http, $location) {
   $scope.question = questions[$scope.counter];
   }
 
+  //Go to the next question
   $scope.next = function(){
     if ($scope.counter == questions.length-1){
       $(":checked").each(function(i, val){
         $scope.userPreferences["prices"].push(val.id);
       });
-      console.log($scope.userPreferences);
-      /*
-      $http.post('/postTest', $scope.userPreferences).
-      success(function(data, status, headers, config) {
-        console.log(data);
-    }).
-      error(function(data, status, headers, config) {
-        console.log(data);
-      });
-      }
-*/
 
       $.ajax({
           url: '/rooms/' + $('body').data('id'),
@@ -101,7 +91,6 @@ controller('preferences', function($scope, $http, $location) {
       $scope.answers = answers[$scope.counter];
     }
   }
-  $scope.messages = "MESSAGES NOW";
 });
 
 app.controller('start', function($scope, $http, $window){
@@ -125,5 +114,10 @@ app.controller('start', function($scope, $http, $window){
   }
   $scope.getStarted = function(){
     $window.location.href = "/rooms/"+$scope.groupNumber;
+  }
+
+  //Helps you join a group
+  $scope.joinGroup = function(){
+    $window.location.href = "/rooms/"+$scope.joinGroupNum;
   }
 })
