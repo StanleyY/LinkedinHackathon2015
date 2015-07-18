@@ -96,6 +96,7 @@ controller('preferences', function($scope, $http, $location) {
 app.controller('start', function($scope, $http, $window){
   $scope.groupCreated = false;
   $scope.groupNumber = 0;
+  $scope.message = "Choose a group name";
   $scope.makeRoom = function(){
     console.log("POSTING STUFF");
     console.log($scope.groupName);

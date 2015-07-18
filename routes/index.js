@@ -27,6 +27,7 @@ router.get('/preferences', function(req, res, next) {
   res.render('preferences', {});
 });
 
+
 router.post('/postTest', function(req, res, next){
 	console.log(req.body);
 Room.findOne({ 'roomNumber' : "1234" }, function(err, room) {
@@ -52,6 +53,15 @@ Room.findOne({ 'roomNumber' : "1234" }, function(err, room) {
 })
 });
 
+router.get('/room', function(req, res, next) {
+  roomData = {
+    title: 'Room',
+
+
+  };
+
+  res.render('rooms', roomData);
+});
 
 
 // API CALLS
