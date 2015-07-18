@@ -64,7 +64,7 @@ controller('rooms', function($scope, $http, $location) {
 
   $scope.loaded = false;
 
-  var promise = $http.get("http://localhost:3000/test?number=" + roomNum);
+  var promise = $http.get("/test?number=" + roomNum);
 
   promise.success(function(data){
     // console.log(data);
