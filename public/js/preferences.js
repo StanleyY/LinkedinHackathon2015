@@ -5,7 +5,8 @@ var questions = [
 
 
 ];
-var cuisines = [
+
+var answers = [[
 "French",
 "Italian",
 "Chinese",
@@ -16,8 +17,7 @@ var cuisines = [
 "Spanish",
 "Greek",
 "Lebanese"
-];
-var allergies = [
+], [
 "eggs",
 "fish",
 "milk",
@@ -25,34 +25,62 @@ var allergies = [
 "shellfish",
 "soya",
 "wheat"
-];
-var prices = [
+],[
 "$",
 "$$",
 "$$$",
 "$$$$"
-]
+]];
 var app = angular.module('foodcheezus', []).
-controller('preferences', function($scope) {
-  $scope.answers = cuisines;
+controller('preferences', function($scope, $http) {
+  $scope.userPreferences = {
+    "cuisines":[],
+    "allergies":[],
+    "prices": [],
+    "name": ""
+  }
   $scope.counter = 0;
-  $scope.question = questions[$scope.counter]
+  $scope.hasName = false;
+  $scope.question = "What's your name?";
+  $scope.grabName = function(){
+    $scope.userPreferences["name"] = $("#nickName").val();
+    $scope.hasName = true;
+       $scope.answers = answers[$scope.counter];
+  $scope.question = questions[$scope.counter];
+  }
   $scope.next = function(){
     if ($scope.counter == questions.length-1){
-
+      $(":checked").each(function(i, val){
+        $scope.userPreferences["prices"].push(val.id);
+      });
+      console.log($scope.userPreferences);
+      $http.post('/postTest', $scope.userPreferences).
+      success(function(data, status, headers, config) {
+        console.log(data);
+    }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+      });
     }
     else {
-      $scope.counter++;
-      $scope.question = questions[$scope.counter];
-      if ($scope.counter == 1){
-        $scope.answers = allergies;
+      if ($scope.counter == 0){
+        $(":checked").each(function(i, val){
+          $scope.userPreferences["cuisines"].push(val.id);
+        });
+      }
+      else if ($scope.counter == 1){
+        $(":checked").each(function(i, val){
+          $scope.userPreferences["allergies"].push(val.id);
+        });
       }
       else if ($scope.counter == 2){
-        $scope.answers = prices;
       }
       else {
         $scope.answers = [];
       }
+      $scope.counter++;
+      $scope.question = questions[$scope.counter];
+      $scope.answers = answers[$scope.counter];
     }
   }
   $scope.messages = "MESSAGES NOW";

@@ -6,6 +6,8 @@ var yelp = require("yelp").createClient({
   token: "Ah9oqYj1mlCwBF-9lsDjttXjt0ks9_ph",
   token_secret: "P-7HFewcOsLWCFWM7dv5aLxRYp0"
 });
+var mongoose = require('mongoose');
+var Room = require('../models/room.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -21,6 +23,10 @@ router.get('/vote', function(req, res, next) {
 router.get('/preferences', function(req, res, next) {
   res.render('preferences', {});
 });
+
+router.post('/postTest', function(req, res, next){
+
+})
 
 
 

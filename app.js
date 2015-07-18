@@ -27,7 +27,7 @@ if (process.env.MONGO_URL) {
     connection_string = process.env.MONGO_URL.replace("mongodb://", "");
 }
 
-mongoose.connect('mongodb://' + connection_string);
+mongoose.connect('mongodb://foodcheezus:food@ds047772.mongolab.com:47772/foodcheezus');
 
 var db = mongoose.connection;
 

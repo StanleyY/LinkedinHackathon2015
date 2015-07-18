@@ -4,7 +4,11 @@ var ObjectId = Schema.ObjectId;
 
 var roomSchema = new Schema({
     name: String,
-    restaurants: [{type: ObjectId, ref: 'Restaurant'}]
+    roomNumber: Number,
+    cuisines: [],
+    prices: [],
+    allergies: [],
+    members: []
 });
 
 roomSchema.statics.getRooms = function(callback) {
