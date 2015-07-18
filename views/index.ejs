@@ -1,26 +1,26 @@
 
 <!DOCTYPE HTML>
-<html>
+<html ng-app="foodcheezus">
   <head>
-    <title>Food Cheezus</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <title>food<b>Cheezus</b></title>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+  <script src="../js/preferences.js"></script>
     <link href="css/style.css" rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!----//End-top-nav-script---->
   </head>
 
-  <body>
+  <body ng-controller="start">
     <div class="main-header">
     <!----- start-header---->
       <div id="home" class="header">
           <div class="top-header">
             <div class="container">
-            <div class="logo">
-                 <img src="images/logo.png" alt="">
-            </div>
+
             <!----start-top-nav---->
              <nav class="top-nav">
               <a href="#" id="pull"><img src="images/menu-icon.png" title="menu" /></a>
@@ -35,17 +35,18 @@
             <ul class="rslides" id="slider4">
               <li>
                 <div class="tittle-head">
-                  <h1>Food Cheezus</h1>
+                  <h1><span style="font-family:sans-serif">food</span><b>Cheezus</b></h1>
                     <p>Find food that makes everyone happy. </p>
                     <div class="learn-button">
-                      <a class="slide-btn" href="#" data-toggle="modal" data-target="#myModal">Make a group</a>
-                      <a class="slide-btn" href="#">Join a group</a>
+                      <a class="slide-btn" style="background-color:#D32F2F;color:white" href="#" data-toggle="modal" data-target="#myModal">Make a group</a>
+                      <a class="slide-btn" style="background-color:#D32F2F;color:white" href="#" data-toggle="modal" data-target="#joinModal">Join a group</a>
                     </div>
                   </div>
               </li>
             </ul>
           </div>
           <div class="clearfix"> </div>
+<<<<<<< HEAD
       </div>
 
 
@@ -69,12 +70,39 @@
             <i class="icon3"> </i>
             <h3>Relax and eat</h3>
             <p>Finally, you get a list of restaurants that meet everyone's conditions. No more need to guess which restaurants work.</p>
+=======
+          </div>
+      <!----- //End-about---->
+      <div id="services" class="services">
+          <div class="container">
+             <div class="gallery-head text-center">
+          <h3>Features</h3>
+          </div>
+            <div class="row text-center feature">
+              <div class="col-md-4 service_grid">
+                <span style="font-size:3.5em;" class="glyphicon glyphicon-user"></span>
+                <h3>Make a group</h3>
+                <p>Effortlessly create a group link for all your friends to join and share their preferences.</p>
+              </div>
+              <div class="col-md-4 service_grid">
+              <span style="font-size:3.5em;" class="glyphicon glyphicon-check"></span>
+              <h3>Add your preferences</h3>
+                <p>Add in your favorite cuisines, cost preferences, allergies, and more to get tailored restaurant recommendations.</p>
+              </div>
+              <div class="col-md-4 service_grid">
+                <span style="font-size:3.5em;" class="glyphicon glyphicon-cutlery"></span>
+                <h3>Relax and eat</h3>
+                <p>Finally, you get a list of restaurants that meet everyone's conditions. No more need to guess which restaurants work.</p>
+              </div>
+            </div>
+>>>>>>> af383b64eb13dcdb4f893a618e7cbbbc081fcaaa
           </div>
         </div>
       </div>
     </div>
 
 
+<<<<<<< HEAD
     <!-- Modal -->
     <div id="myModal" class="modal fade" role="dialog">
       <div class="modal-dialog">
@@ -96,6 +124,52 @@
           </div>
         </div>
 
+=======
+<!-- CREATE -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Create group content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="color:#7A7A7A">Group Name</h4>
+      </div>
+      <div class="modal-body">
+      <p style="margin-top: 20px" ng-show="groupCreated"> {{message}} </p>
+        <form>
+  <div class="form-group" ng-hide="groupCreated"><br>
+    <label for="exampleInputEmail1"></label>
+    <input class="form-control" id="groupName" ng-model="groupName" placeholder="foodcheezus lovers" style="width:50%">
+  </div><br><br>
+  <button ng-click="makeRoom()" class="btn btn-default" ng-hide="groupCreated">Make a group</button>
+  <button ng-click="getStarted()" class="btn btn-default" ng-show="groupCreated">Let's Eat!</button>
+</form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- JOIN -->
+<div id="joinModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Create group content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" style="color:#7A7A7A">Join a Group</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+  <div class="form-group"><br>
+    <label for="exampleInputEmail1">Please enter your group number.</label>
+    <input class="form-control" id="groupName" placeholder="eg. 928" style="width:50%" ng-model="joinGroupNum">
+  </div><br><br>
+  <button class="btn btn-default" ng-click="joinGroup()">Join a group</button>
+</form>
+>>>>>>> af383b64eb13dcdb4f893a618e7cbbbc081fcaaa
       </div>
     </div>
 

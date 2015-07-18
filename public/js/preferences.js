@@ -1,12 +1,13 @@
 var questions = [
-"Pick your favorite cuisines.",
-"Do you have any allergies?",
-"What's your price preference?"
+"What are you in the mood for?",
+"Do you have any food restrictions?",
+"What prices are you comfortable with?"
 
 
 ];
 
 var answers = [[
+"American",
 "French",
 "Italian",
 "Chinese",
@@ -15,15 +16,14 @@ var answers = [[
 "Mexican",
 "Japanese",
 "Spanish",
-"Greek",
-"Lebanese"
+"Greek"
 ], [
 "eggs",
 "fish",
 "milk",
 "nuts",
 "shellfish",
-"soya",
+"soy",
 "wheat"
 ],[
 "$",
@@ -32,34 +32,42 @@ var answers = [[
 "$$$$"
 ]];
 var app = angular.module('foodcheezus', []).
-controller('preferences', function($scope, $http) {
+controller('preferences', function($scope, $http, $location) {
   $scope.userPreferences = {
     "cuisines":[],
     "allergies":[],
     "prices": [],
-    "name": ""
-  }
+    "name": "",
+    "roomNumber": $('body').data('id')
+  };
+  console.log($scope.userPreferences);
   $scope.counter = 0;
   $scope.hasName = false;
   $scope.question = "What's your name?";
+
+  //Grab the user's chosen nickname
   $scope.grabName = function(){
     $scope.userPreferences["name"] = $("#nickName").val();
     $scope.hasName = true;
        $scope.answers = answers[$scope.counter];
   $scope.question = questions[$scope.counter];
   }
+
+  //Go to the next question
   $scope.next = function(){
     if ($scope.counter == questions.length-1){
       $(":checked").each(function(i, val){
         $scope.userPreferences["prices"].push(val.id);
       });
-      console.log($scope.userPreferences);
-      $http.post('/postTest', $scope.userPreferences).
-      success(function(data, status, headers, config) {
-        console.log(data);
-    }).
-      error(function(data, status, headers, config) {
-        console.log(data);
+
+      $.ajax({
+          url: '/rooms/' + $('body').data('id'),
+          type: "POST",
+          data: $scope.userPreferences,
+          dataType: "json",
+          success: function(response) {
+            window.location.href = "/rooms/"+$scope.userPreferences.roomNumber + "/info";
+          }
       });
     }
     else {
@@ -83,5 +91,33 @@ controller('preferences', function($scope, $http) {
       $scope.answers = answers[$scope.counter];
     }
   }
-  $scope.messages = "MESSAGES NOW";
 });
+
+app.controller('start', function($scope, $http, $window){
+  $scope.groupCreated = false;
+  $scope.groupNumber = 0;
+  $scope.makeRoom = function(){
+    console.log("POSTING STUFF");
+    console.log($scope.groupName);
+          $http.post('/rooms', {"groupName":$scope.groupName}).
+      success(function(data, status, headers, config) {
+        console.log(data);
+        $scope.groupCreated = true;
+        $scope.groupNumber = Math.round(data.roomNumber).toString()
+        $scope.message = "Your group number is " + $scope.groupNumber +
+        ". Share this number with your friends!";
+
+    }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+      });
+  }
+  $scope.getStarted = function(){
+    $window.location.href = "/rooms/"+$scope.groupNumber;
+  }
+
+  //Helps you join a group
+  $scope.joinGroup = function(){
+    $window.location.href = "/rooms/"+$scope.joinGroupNum;
+  }
+})
