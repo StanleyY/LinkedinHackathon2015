@@ -12,4 +12,9 @@ router.get('/vote', function(req, res, next) {
   res.render('vote', { title: 'Vote!!!' });
 });
 
+router.get('/preferences', function(req, res, next) {
+  res.render('preferences', {});
+});
+
+
 module.exports = router;
