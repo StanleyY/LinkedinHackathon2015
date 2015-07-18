@@ -24,4 +24,31 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+router.get('/:name', function(req, res) {
+	var name = req.params.name;
+	Room.getRoomByName(name, function(result) {
+		if (result.code === 200) {
+			var room = result.data;
+			res.render('room', {
+				title: room.name,
+				room: room
+			})
+		} else {
+			utils.sendErrResponse(res, result.code, result.err);
+		}
+	});
+});
+
+router.post('/:name', function(req, res) {
+	var name = req.params.name;
+	var cuisine = req.body.cuisine;
+	Room.addPreferences(name, username, cuisines, prices, function(result) {
+		if (result.code === 200) {
+			utils.sendSuccessResponse(res);
+		} else {
+			utils.sendErrResponse(res, result.code, result.err);
+		}
+	});
+});
+
 module.exports = router;
