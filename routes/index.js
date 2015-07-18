@@ -18,13 +18,12 @@ router.get('/vote', function(req, res, next) {
   res.render('vote', { title: 'Vote!!!' });
 });
 
-<<<<<<< HEAD
 router.get('/preferences', function(req, res, next) {
   res.render('preferences', {});
 });
 
 
-=======
+
 // API CALLS
 router.get('/test', function (req, res) {
   yelp.search({location: "San Francisco, CA"}, function(error, data) {
@@ -32,5 +31,4 @@ router.get('/test', function (req, res) {
   });
 });
 
->>>>>>> 245b8eac8b7a754fd609f6992b2774662066b276
 module.exports = router;
