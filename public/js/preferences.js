@@ -66,7 +66,7 @@ controller('preferences', function($scope, $http, $location) {
           data: $scope.userPreferences,
           dataType: "json",
           success: function(response) {
-            window.location.href = "/rooms/"+$scope.userPreferences.roomNumber + "/info";
+            window.location.href = "/rooms/"+$scope.userPreferences.roomNumber + "/results";
           }
       });
     }
