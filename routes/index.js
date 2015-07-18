@@ -67,7 +67,11 @@ router.get('/room', function(req, res, next) {
 // API CALLS
 router.get('/test', function (req, res) {
   console.log(req.query);
-  var query = req.query;
+  var query = {
+    term: 'chinese, mexican',
+    location: 'San Francisco, CA',
+    radius_filter: '10000'
+  };
 
   yelp.search(query, function(error, data) {
       var restaurantsData = data.businesses.map(function(value) {
@@ -97,7 +101,7 @@ router.get('/test', function (req, res) {
         return 0;
       }
       restaurantsData.sort(scoreFn);
-      console.log(restaurantsData);
+      res.json(restaurantsData);
   });
 
   function calculateScores(restaurants) {
