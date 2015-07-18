@@ -1,3 +1,16 @@
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        console.log("Geolocation is not supported by this browser.");
+    }
+}
+function showPosition(position) {
+     console.log("Latitude: " + position.coords.latitude + "\n" + "Longitude: " + position.coords.longitude);
+}
+
+getLocation();
+
 var questions = [
 "What are you in the mood for?",
 "Do you have any food restrictions?",
