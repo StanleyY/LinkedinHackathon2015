@@ -75,6 +75,8 @@ router.get('/test', function (req, res) {
         new_obj.rating = value.rating;
         new_obj.name = value.name;
         new_obj.address = value.location.address;
+        new_obj.yelpUrl = value.url;
+        new_obj.imgUrl = value.image_url;
         new_obj.price = Math.floor((Math.random() * 10) + 1) % 4 + 1;
         new_obj.categories = value.categories.map(function(value){
             return value[0];
