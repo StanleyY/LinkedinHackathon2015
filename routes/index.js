@@ -36,8 +36,10 @@ router.post('/postTest', function(req, res, next){
 // API CALLS
 router.get('/test', function (req, res) {
   console.log(req.query);
-  yelp.search(req.query, function(error, data) {
-      var cleaned = data.businesses.map(function(value) {
+  var query = req.query;
+
+  yelp.search(query, function(error, data) {
+      var restaurantsData = data.businesses.map(function(value) {
         var new_obj = {};
         new_obj.rating = value.rating;
         new_obj.name = value.name;
@@ -47,11 +49,41 @@ router.get('/test', function (req, res) {
             return value[0];
         });
         new_obj.score = 0;
+        new_obj.categoriesVotes = 0;
+        new_obj.priceVotes = 0;
         return new_obj;
       });
-      console.log(cleaned);
+      calculateScores(restaurantsData);
+      function scoreFn(a, b) {
+        if (a.score > b.score) {
+          return -1;
+        }
+        if (a.score < b.score) {
+          return 1;
+        }
+        return 0;
+      }
+      restaurantsData.sort(scoreFn);
+      console.log(restaurantsData);
   });
 
+  function calculateScores(restaurants) {
+    var categoriesWeights = {'Chinese': 4, 'Italian': 2, 'Greek': 1};
+    var priceWeights = [0,4,5,2,0];
+
+    for (var i=0; i < restaurants.length; i++) {
+      var current = restaurants[i]
+      for (var j = 0; j < current.categories.length; j++) {
+        var value = categoriesWeights[current.categories[j]];
+        if (value) {
+          current.score += 80 * value;
+          current.categoriesVotes += value;
+        }
+      }
+      current.score += 50 * priceWeights[current.price];
+      current.priceVotes = priceWeights[current.price];
+    }
+  }
   /*
   var parameters = {
         location: [37.752152, -122.419061], // Mission Street Coordinates
