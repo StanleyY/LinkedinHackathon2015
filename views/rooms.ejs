@@ -1,20 +1,175 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="/js/rooms.js"></script>
+    <title>Food Cheezus</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+    <script src="../js/preferences.js"></script>
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      html {
+        background: url(../images/bg.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
+
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-    <input id="room-input" placeholder="Enter room name"></input>
-    <button id="room-button">Add</button>
-    <div id="rooms">
- 		<% for (var i=0; i<rooms.length; i++) { %>
- 			<div class="room"><%= rooms[i] %></div>
- 		<% } %>
+
     </div>
+  </body>
+</html>
+ -->
+
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Food Cheezus</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+    <script src="../js/rooms.js"></script>
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/bower_components/lumx/dist/lumx.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+
+
+<!--     <link href="../css/material.css" rel='stylesheet' type='text/css' />
+    <link href="../css/roboto.css" rel='stylesheet' type='text/css' />
+ -->
+    <style>
+      html {
+        background: url(../images/bg.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+      }
+    </style>
+  </head>
+
+  <!-- <h1> Your Restaurants </h1> -->
+
+  <body ng-app="foodcheezus">
+
+
+
+  <div style="position:fixed; z-index:500; width:100%; top:-10px">
+
+    <div class="card bgc-red-700 tc-white-1">
+      <div class="toolbar">
+
+              <span class="toolbar__label fs-title" style="position:absolute; left:75px; cursor:pointer;" onClick="window.location.href='/">
+                  <span class="fs-display-1"> food<b>CHEEZUS</b> </span>
+              </span>
+
+              <!-- <span class="toolbar__right fs-title" style="position:absolute; right:15px;" ng-cloak>
+                <span class="fs-title"> your restaurant options </span>
+              </span> -->
+
+      </div>
+    </div>
+
+  </div>
+
+  <div style="height:60px"></div>
+
+    <div ng-controller="rooms" style="margin-top:10px;">
+
+      <div id="top" class="callbacks_container">
+        <div class="container">
+          <div class="row">
+            <!-- <div class="col-md-8 col-md-offset-2">
+
+                <div class="header-text"> your restaurants </div>
+
+                <div ng-repeat="restaurant in restaurants" class="restaurant-card">
+
+                    <div class="restaurant-card-image">
+                      <a href="{{restaurant.yelpUrl}}"><img class="img-responsive" src="{{restaurant.imgUrl}}"></a>
+                    </div>
+
+                    <div class="restaurant-card-content">
+                        <span class="restaurant-card-title"> {{ restaurant.name }} </span>
+                        <span ng-repeat="category in restaurant.categories" class="card-accent-text"> {{ category }} | </span>
+
+                        <hr>
+
+                        <span class="card-accent-text"> allergies: </span> <span ng-repeat="allergy in restaurant.allergies"> {{ allergy }} </span>
+
+                        <br><span> <span class="card-accent-text"> price: </span> {{ restaurant.price }} </span><br>
+                        <span> <span class="card-accent-text"> rating: </span> {{ restaurant.rating }} stars</span><br>
+                        <span> <span class="card-accent-text"> location: </span> {{ restaurant.address }} </span><br>
+                    </div>
+
+                </div>
+            </div> -->
+
+          <div class="col-md-9 col-md-offset-1">
+
+
+          <span class="fs-display-1 display-block tc-white-1"> suggestions from food cheezus to you </span>
+          <span class="fs-body display-block tc-white-2"> food cheezus is always right </span>
+
+
+            <div ng-repeat="restaurant in restaurants" flex-item>
+              <div class="card">
+                  <div flex-container="row">
+                      <div class="card__img card__img--left" style="height: 160px">
+                          <a href="{{restaurant.yelpUrl}}"><img src="{{restaurant.imgUrl}}"></a>
+                      </div>
+
+                      <div flex-item flex-container="column">
+                          <div flex-item>
+                              <div class="p+">
+                                  <span class="fs-headline display-block">{{restaurant.name}} </span>
+                                  <span ng-repeat="category in restaurant.categories" class="fs-subhead tc-black-2"> {{ category }} | </span>
+
+                                  <br>
+
+                                  <span class="tc-red-900"> allergies: </span> <span ng-repeat="allergy in restaurant.allergies"> {{ allergy }} </span>
+                                  <span> <span class="tc-red-900"> price: </span> {{ restaurant.price }} </span>
+                                  <span> <span class="tc-red-900"> rating: </span> {{ restaurant.rating }} stars</span>
+                                  <span> <span class="tc-red-900"> location: </span> {{ restaurant.address }} </span>
+
+                              </div>
+
+                          </div>
+
+
+
+                          <div class="card__actions">
+                              <a href="{{restaurant.yelpUrl}}"> <button class="btn btn--m btn--flat tc-red-900" lx-ripple>Yelp Reviews</button></a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+
+        </div>
+    </div>
+    <div> &nbsp; </div>
+</div>
+
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/velocity/velocity.js"></script>
+<script src="/bower_components/moment/min/moment-with-locales.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/lumx/dist/lumx.js"></script>
+
   </body>
 </html>

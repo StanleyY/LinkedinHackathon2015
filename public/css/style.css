@@ -80,7 +80,7 @@ nav a#pull {
 }
 /*Styles for screen 600px and lower*/
 @media screen and (max-width: 768px) {
-	nav { 
+	nav {
   		height: auto;
   		float:none;
   	}
@@ -156,7 +156,7 @@ nav a#pull {
 }
 /*----slider----*/
 .main-header{
-	background:url(../images/bg.jpg);
+	background:url(../images/bg.jpg) ;
 	background-size:cover;
 	min-height: 700px;
 }
@@ -377,7 +377,7 @@ nav a#pull {
 	font-family: 'Lato', sans-serif;
 	font-weight:300;
 	margin: 1em 0;
-	
+
 }
 /*----*/
 .learn-button {
@@ -488,7 +488,7 @@ i.icon2:hover{
 	background: url(../images/icons-spt.png)no-repeat -144px -126px;
 }
 i.icon3:hover{
-	background: url(../images/icons-spt.png)no-repeat -266px -123px;	
+	background: url(../images/icons-spt.png)no-repeat -266px -123px;
 }
 .service_grid h3 {
 	color: #333;
@@ -609,7 +609,7 @@ i.icon3:hover{
    overflow: hidden;
    top: 0;
    left: 0;
-   height: 100%;	
+   height: 100%;
 }
 .view img,.view2 img  {
    display: block;
@@ -699,16 +699,16 @@ i.icon3:hover{
 	-ms-transition-delay:0.3s;
 	transition-delay:0.3s;
 }
-/****end-CSS3 EFFECTS *****/	
+/****end-CSS3 EFFECTS *****/
 #team {
 	background: #F8F8F8;
 	padding-top: 3em;
 	padding-bottom:6em;
-}	
+}
 .team-head {
 	text-align: center;
 	margin: 2em 0;
-}		
+}
 
 .teams-head {
 	margin: 4em 0;
@@ -1237,7 +1237,7 @@ ul.soc_icons{
 	font-size: 1em;
 	line-height: 1.8em;
 	}
-	
+
 }
 @media(max-width:320px){
 	.logo {
@@ -1412,3 +1412,125 @@ ul.soc_icons{
   color: #ffd8a6;
   text-decoration: none;
 }
+
+
+
+/*@import url(http://fonts.googleapis.com/css?family=Roboto:400,300);*/
+/*@import url(//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);*/
+
+.restaurant-card{
+    font-family: 'Roboto', sans-serif;
+    margin-top: 10px;
+    box-sizing: border-box;
+    /*position: relative;*/
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 4 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 2px;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 1)
+}
+
+.restaurant-card .restaurant-card-image{
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    border-radius: 2px 2px 0 0;
+    background-clip: padding-box;
+    position: relative;
+    /*z-index: -1;*/
+}
+
+.restaurant-card-image {
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+}
+
+.restaurant-card .restaurant-card-image img{
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.restaurant-card .restaurant-card-image:hover img{
+    -webkit-transform: scale(1.2) rotate(-7deg);
+    -moz-transform: scale(1.2) rotate(-7deg);
+    -ms-transform: scale(1.2) rotate(-7deg);
+    -o-transform: scale(1.2) rotate(-7deg);
+    transform: scale(1.2) rotate(-7deg);
+}
+
+.restaurant-card .restaurant-card-content {
+    padding: 10px;
+    background-clip: padding-box;
+}
+
+.restaurant-card .restaurant-card-content .restaurant-card-title, .restaurant-card-reveal .restaurant-card-title{
+    font-size: 24px;
+    font-weight: 200;
+}
+
+.restaurant-card .restaurant-card-action{
+    padding: 20px;
+    border-top: 1px solid rgba(160, 160, 160, 0.2);
+}
+.restaurant-card .restaurant-card-action a{
+    font-size: 15px;
+    color: #ffab40;
+    text-transform:uppercase;
+    margin-right: 20px;
+    -webkit-transition: color 0.3s ease;
+    -moz-transition: color 0.3s ease;
+    -o-transition: color 0.3s ease;
+    -ms-transition: color 0.3s ease;
+    transition: color 0.3s ease;
+}
+.restaurant-card .restaurant-card-action a:hover{
+    color: #ffd8a6;
+    text-decoration: none;
+}
+
+.card-accent-text {
+  font-size: 15px;
+  color: #B71C1C;
+}
+
+.restaurant-card .restaurant-card-reveal{
+    padding: 20px;
+    position: absolute;
+    background-color: #FFF;
+    /*background-color: transparent;*/
+    width: 100%;
+    overflow-y: auto;
+    /*top: 0;*/
+    left:0;
+    bottom:0;
+    height: 100%;
+    z-index: 1;
+    display: none;
+}
+
+.restaurant-card .restaurant-card-reveal p{
+    color: rgba(0, 0, 0, 0.71);
+    margin:20px ;
+}
+
+.restaurant-card-btn{
+    /*background-color: transparent;*/
+    font-size:18px;
+}
+
+.header-text {
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  font-size: 24px;
+}
+
+
