@@ -54,11 +54,18 @@ var app = angular.module('foodcheezus', ['lumx']).
 controller('rooms', function($scope, $http, $location) {
   $scope.test = "MEEPEPPEP";
 
-console.log("** URL"  + $location.absUrl());
+  var url = $location.absUrl();
+
+  var thing = url.split("/");
+  console.log(thing);
+
+  var roomNum = thing[thing.length - 2];
+  console.log(roomNum);
 
   $scope.loaded = false;
 
-  var promise = $http.get("http://localhost:3000/test?number=329");
+  var promise = $http.get("http://localhost:3000/test?number=" + roomNum);
+
   promise.success(function(data){
     // console.log(data);
     restaurants = data;

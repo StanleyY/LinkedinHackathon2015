@@ -141,6 +141,9 @@
                                   <span class="tc-red-900"><b> address: </b></span> <span ng-repeat="addressLine in restaurant.address"> {{ addressLine }} </span>
                                   <span> <span class="tc-red-900"><b> score: </b></span> {{ restaurant.score }} </span>
 
+                                  <br>
+                                  <span> This restaurant is within <b class="fs-title tc-red-900">{{restaurant.priceVotes}}</b> food followers' price range, and satisfies  <b class="fs-title tc-red-900">{{restaurant.categoriesVotes}}</b> food followers' cuisine preferences </span>
+
                               </div>
 
                           </div>
