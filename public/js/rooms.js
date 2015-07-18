@@ -32,14 +32,50 @@ var r3 = {
   yelpUrl: 'http://www.yelp.com/biz/alexanders-steakhouse-san-francisco'
 };
 
-var restaurants = [r1, r2, r3];
+var r4 = { rating: 3.5,
+    name: 'Mission Chinese Food',
+    address: [ 'Lung Shan Restaurant', '2234 Mission St' ],
+    price: 2,
+    categories: [ 'Chinese' ],
+    score: 570,
+    categoriesVotes: 4,
+    priceVotes: 5,
+    imgUrl: 'http://media.dfrg.com/_sullivanssteakhouse/gallery/chicago-02-popup.jpg',
+    yelpUrl: 'http://www.yelp.com/biz/alexanders-steakhouse-san-francisco'
+  };
+
+
+// var restaurants = [r1, r2, r3];
+var restaurants = [r4];
 
 // $.material.init()
 
 var app = angular.module('foodcheezus', ['lumx']).
 controller('rooms', function($scope) {
   $scope.test = "MEEPEPPEP";
+
+  for (var i = 0; i < restaurants.length; i++) {
+    var priceStr = "";
+    for (var j = 0; j < restaurants[i].price; j++) {
+      priceStr += "$";
+    }
+    restaurants[i].priceStr = priceStr;
+
+    var categoriesStr = "";
+    for (var j = 0; j < restaurants[i].categories.length; j++) {
+      categoriesStr += restaurants[i].categories[j] + " ";
+      if (j < restaurants[i].categories.length - 1) categoriesStr + "| ";
+    }
+    restaurants[i].categoriesStr = categoriesStr;
+
+  }
+
+
+
+
   $scope.restaurants = restaurants;
+
+
 
 });
 
