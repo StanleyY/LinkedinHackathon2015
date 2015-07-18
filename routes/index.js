@@ -1,4 +1,7 @@
 var express = require('express');
+var googlePlaces = require('googleplaces');
+// export GOOGLE_PLACES_API_KEY="AIzaSyAKRFiBIfTf0n0gFcwb1k8vV-xC54Wknz8"
+var gp = new googlePlaces(process.env.GOOGLE_PLACES_API_KEY, 'json');
 var router = express.Router();
 var yelp = require("yelp").createClient({
   consumer_key: "b5dyo1G64IV9V2cz8nksug",
@@ -32,9 +35,34 @@ router.post('/postTest', function(req, res, next){
 
 // API CALLS
 router.get('/test', function (req, res) {
-  yelp.search({location: "San Francisco, CA"}, function(error, data) {
-      console.log(data);
+  console.log(req.query);
+  yelp.search(req.query, function(error, data) {
+      var cleaned = data.businesses.map(function(value) {
+        var new_obj = {};
+        new_obj.rating = value.rating;
+        new_obj.name = value.name;
+        new_obj.address = value.location.address;
+        new_obj.price = Math.floor((Math.random() * 10) + 1) % 4 + 1;
+        new_obj.categories = value.categories.map(function(value){
+            return value[0];
+        });
+        return new_obj;
+      });
+      console.log(cleaned);
   });
+
+  /*
+  var parameters = {
+        location: [37.752152, -122.419061], // Mission Street Coordinates
+        radius: 5000,
+        types: "restaurant",
+        keyword: "Mexican"
+    };
+    gp.placeSearch(parameters, function (error, response) {
+        if (error) throw error;
+        console.log(response);
+    });
+    */
 });
 
 module.exports = router;
