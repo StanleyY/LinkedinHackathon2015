@@ -115,7 +115,6 @@
           <span class="fs-body display-block tc-white-2" style="text-align: center;"> food cheezus is always right </span>
           <br>
 
-
             <div ng-repeat="restaurant in restaurants" flex-item>
               <div class="card">
                   <div flex-container="row">
@@ -127,20 +126,21 @@
                           <div flex-item>
                               <div class="p+">
                                   <span class="fs-headline display-block">{{restaurant.name}} </span>
-                                  <span ng-repeat="category in restaurant.categories" class="fs-subhead tc-black-2"> {{ category }} | </span>
+                                  <span class="fs-subhead tc-black-2">{{restaurant.categoriesStr}}</span>
+                               <!--    <span ng-repeat="category in restaurant.categories" class="fs-subhead tc-black-2"> {{ category }} | </span> -->
 
                                   <br>
 
-                                  <span class="tc-red-900"><b> allergies: </b></span> <span ng-repeat="allergy in restaurant.allergies"> {{ allergy }} </span>
-                                  <span> <span class="tc-red-900"><b> price: </b></span> {{ restaurant.price }} </span>
+                                  <span class="tc-red-900"><b> price: </b></span>
+                                  <span> {{ restaurant.priceStr }} </span>
+
+
                                   <span> <span class="tc-red-900"><b> rating: </b></span> {{ restaurant.rating }} stars</span>
-                                  <span> <span class="tc-red-900"><b> location: </b></span> {{ restaurant.address }} </span>
+                                  <span class="tc-red-900"><b> address: </b></span> <span ng-repeat="addressLine in restaurant.address"> {{ addressLine }} </span>
 
                               </div>
 
                           </div>
-
-
 
                           <div class="card__actions">
                               <a href="{{restaurant.yelpUrl}}"> <button class="btn btn--m btn--flat tc-red-900" lx-ripple>Yelp Reviews</button></a>
@@ -148,6 +148,8 @@
                       </div>
                   </div>
               </div>
+          }
+          }
           </div>
         </div>
 
