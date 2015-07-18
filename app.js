@@ -4,11 +4,38 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var rooms = require('./routes/rooms');
 
 var app = express();
+
+// Connect to MongoDB
+var connection_string = 'localhost/hackathon';
+
+if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + '@' +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/hackathon';
+}
+
+if (process.env.MONGO_URL) {
+    connection_string = process.env.MONGO_URL.replace("mongodb://", "");
+}
+
+mongoose.connect('mongodb://' + connection_string);
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+    app.set('db', db);
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +51,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/rooms', rooms);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
