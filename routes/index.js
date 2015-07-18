@@ -53,6 +53,8 @@ Room.findOne({ 'roomNumber' : "1234" }, function(err, room) {
 })
 });
 
+
+
 router.get('/room', function(req, res, next) {
   roomData = {
     title: 'Room',
