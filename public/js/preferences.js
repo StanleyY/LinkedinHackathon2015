@@ -7,6 +7,7 @@ var questions = [
 ];
 
 var answers = [[
+"American",
 "French",
 "Italian",
 "Chinese",
@@ -15,15 +16,14 @@ var answers = [[
 "Mexican",
 "Japanese",
 "Spanish",
-"Greek",
-"Lebanese"
+"Greek"
 ], [
 "eggs",
 "fish",
 "milk",
 "nuts",
 "shellfish",
-"soya",
+"soy",
 "wheat"
 ],[
 "$",
@@ -32,22 +32,27 @@ var answers = [[
 "$$$$"
 ]];
 var app = angular.module('foodcheezus', []).
-controller('preferences', function($scope, $http) {
+controller('preferences', function($scope, $http, $location) {
+  console.log($location.path());
   $scope.userPreferences = {
     "cuisines":[],
     "allergies":[],
     "prices": [],
-    "name": ""
-  }
+    "name": "",
+    "roomNumber": $location.path()
+  };
+  console.log($scope.userPreferences);
   $scope.counter = 0;
   $scope.hasName = false;
   $scope.question = "What's your name?";
+
   $scope.grabName = function(){
     $scope.userPreferences["name"] = $("#nickName").val();
     $scope.hasName = true;
        $scope.answers = answers[$scope.counter];
   $scope.question = questions[$scope.counter];
   }
+
   $scope.next = function(){
     if ($scope.counter == questions.length-1){
       $(":checked").each(function(i, val){
@@ -85,3 +90,27 @@ controller('preferences', function($scope, $http) {
   }
   $scope.messages = "MESSAGES NOW";
 });
+
+app.controller('start', function($scope, $http, $window){
+  $scope.groupCreated = false;
+  $scope.groupNumber = 0;
+  $scope.makeRoom = function(){
+    console.log("POSTING STUFF");
+    console.log($scope.groupName);
+          $http.post('/rooms', {"groupName":$scope.groupName}).
+      success(function(data, status, headers, config) {
+        console.log(data);
+        $scope.groupCreated = true;
+        $scope.groupNumber = Math.round(data.roomNumber).toString()
+        $scope.message = "Your group number is " + $scope.groupNumber +
+        ". Share this number with your friends!";
+
+    }).
+      error(function(data, status, headers, config) {
+        console.log(data);
+      });
+  }
+  $scope.getStarted = function(){
+    $window.location.href = "/rooms/"+$scope.groupNumber;
+  }
+})
