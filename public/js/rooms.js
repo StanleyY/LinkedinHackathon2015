@@ -69,10 +69,6 @@ controller('rooms', function($scope) {
     restaurants[i].categoriesStr = categoriesStr;
 
   }
-
-
-
-
   $scope.restaurants = restaurants;
 
 
