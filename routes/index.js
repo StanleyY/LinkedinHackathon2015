@@ -29,7 +29,7 @@ router.get('/preferences', function(req, res, next) {
 
 router.post('/postTest', function(req, res, next){
 	console.log(req.body);
-Room.findOne({ 'groupId' : "1234" }, function(err, room) {
+Room.findOne({ 'roomNumber' : "1234" }, function(err, room) {
 	if (!room) {
 		console.log("THERE IS NO ROOM");
 		var blah = new Room();
@@ -42,6 +42,12 @@ Room.findOne({ 'groupId' : "1234" }, function(err, room) {
 	}
 	else {
 		console.log("THERE IS A ROOM");
+		room.members.push(req.body.name);
+		room.cuisines.push(req.body.cuisines);
+		room.prices.push(req.body.prices);
+		room.allergies.push(req.body.allergies);
+		console.log(room);
+
 	}
 })
 });
