@@ -9,7 +9,7 @@ function showPosition(position) {
      console.log("Latitude: " + position.coords.latitude + "\n" + "Longitude: " + position.coords.longitude);
 }
 
-getLocation();
+
 
 var questions = [
 "What are you in the mood for?",
@@ -46,6 +46,7 @@ var answers = [[
 ]];
 var app = angular.module('foodcheezus', []).
 controller('preferences', function($scope, $http, $location) {
+
   $scope.userPreferences = {
     "cuisines":[],
     "allergies":[],
@@ -85,6 +86,7 @@ controller('preferences', function($scope, $http, $location) {
     }
     else {
       if ($scope.counter == 0){
+        getLocation();
         $(":checked").each(function(i, val){
           $scope.userPreferences["cuisines"].push(val.id);
         });
