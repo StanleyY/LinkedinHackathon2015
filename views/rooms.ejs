@@ -65,24 +65,14 @@
 
   <body ng-app="foodcheezus">
 
-
-
   <div style="position:fixed; z-index:500; width:100%; top:-10px">
-
     <div class="card bgc-red-700 tc-white-1">
       <div class="toolbar">
-
-              <span class="toolbar__label fs-title" style="position:absolute; left:75px; cursor:pointer;" onClick="window.location.href='/">
-                  <span class="fs-display-1"> food<b>CHEEZUS</b> </span>
-              </span>
-
-              <!-- <span class="toolbar__right fs-title" style="position:absolute; right:15px;" ng-cloak>
-                <span class="fs-title"> your restaurant options </span>
-              </span> -->
-
+        <span class="toolbar__label fs-title" style="position:absolute; left:75px; cursor:pointer;" onClick="window.location.href='/">
+            <span class="fs-display-1"> food<b>CHEEZUS</b> </span>
+        </span>
       </div>
     </div>
-
   </div>
 
   <div style="height:60px"></div>
@@ -120,9 +110,10 @@
 
           <div class="col-md-9 col-md-offset-1">
 
-
-          <span class="fs-display-1 display-block tc-white-1"> suggestions from food cheezus to you </span>
-          <span class="fs-body display-block tc-white-2"> food cheezus is always right </span>
+          <br>
+          <span class="fs-display-1 display-block tc-white-1" style="text-align: center;"> suggestions from food cheezus to you </span>
+          <span class="fs-body display-block tc-white-2" style="text-align: center;"> food cheezus is always right </span>
+          <br>
 
 
             <div ng-repeat="restaurant in restaurants" flex-item>
@@ -140,10 +131,10 @@
 
                                   <br>
 
-                                  <span class="tc-red-900"> allergies: </span> <span ng-repeat="allergy in restaurant.allergies"> {{ allergy }} </span>
-                                  <span> <span class="tc-red-900"> price: </span> {{ restaurant.price }} </span>
-                                  <span> <span class="tc-red-900"> rating: </span> {{ restaurant.rating }} stars</span>
-                                  <span> <span class="tc-red-900"> location: </span> {{ restaurant.address }} </span>
+                                  <span class="tc-red-900"><b> allergies: </b></span> <span ng-repeat="allergy in restaurant.allergies"> {{ allergy }} </span>
+                                  <span> <span class="tc-red-900"><b> price: </b></span> {{ restaurant.price }} </span>
+                                  <span> <span class="tc-red-900"><b> rating: </b></span> {{ restaurant.rating }} stars</span>
+                                  <span> <span class="tc-red-900"><b> location: </b></span> {{ restaurant.address }} </span>
 
                               </div>
 
