@@ -94,7 +94,7 @@ router.get('/test', function (req, res) {
 
   var query = {
     term: keyterms.join(", "),
-    location: 'San Francisco, CA',
+    location: '2051 Stierlin Ct, Mountain View, CA 94043', // TODO: use GPS coords
     radius_filter: '10000'
   };
   yelp.search(query, function(error, data) {
