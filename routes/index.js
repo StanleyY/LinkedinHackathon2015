@@ -68,13 +68,37 @@ router.get('/room', function(req, res, next) {
 
 // API CALLS
 router.get('/test', function (req, res) {
-  console.log(req.query);
+  var roomNumber = req.query.number;
+  Room.getRoomById(roomNumber, function(val){
+
+  var roomData = val.data;
+  console.log(roomData);
+
+  var categoriesWeights = {};
+  var priceWeights = [0, 0, 0, 0, 0];
+  var keyterms = [];
+  for (var i = 0; i < roomData.cuisines.length; i++) {
+    if (categoriesWeights[roomData.cuisines[i]] == null) {
+      categoriesWeights[roomData.cuisines[i]] = 0;
+      keyterms.push(roomData.cuisines[i]);
+    }
+    categoriesWeights[roomData.cuisines[i]] += 1;
+  }
+
+  for (var i = 0; i < roomData.prices.length; i++){
+    priceWeights[roomData.prices[i].length]++;
+  }
+
+  console.log("WEIGHTS INFO AND KEY TERMS");
+  console.log(categoriesWeights);
+  console.log(priceWeights);
+  console.log(keyterms.join(", "));
+
   var query = {
-    term: 'chinese, mexican',
+    term: keyterms.join(", "),
     location: 'San Francisco, CA',
     radius_filter: '10000'
   };
-
   yelp.search(query, function(error, data) {
       var restaurantsData = data.businesses.map(function(value) {
         var new_obj = {};
@@ -107,9 +131,6 @@ router.get('/test', function (req, res) {
   });
 
   function calculateScores(restaurants) {
-    var categoriesWeights = {'Chinese': 4, 'Italian': 2, 'Greek': 1};
-    var priceWeights = [0,4,5,2,0];
-
     for (var i=0; i < restaurants.length; i++) {
       var current = restaurants[i]
       for (var j = 0; j < current.categories.length; j++) {
@@ -123,18 +144,7 @@ router.get('/test', function (req, res) {
       current.priceVotes = priceWeights[current.price];
     }
   }
-  /*
-  var parameters = {
-        location: [37.752152, -122.419061], // Mission Street Coordinates
-        radius: 5000,
-        types: "restaurant",
-        keyword: "Mexican"
-    };
-    gp.placeSearch(parameters, function (error, response) {
-        if (error) throw error;
-        console.log(response);
-    });
-    */
+  });
 });
 
 module.exports = router;
