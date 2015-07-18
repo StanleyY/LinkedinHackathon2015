@@ -46,6 +46,7 @@ router.get('/test', function (req, res) {
         new_obj.categories = value.categories.map(function(value){
             return value[0];
         });
+        new_obj.score = 0;
         return new_obj;
       });
       console.log(cleaned);
