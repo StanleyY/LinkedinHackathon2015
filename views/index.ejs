@@ -8,7 +8,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
   <script src="../js/preferences.js"></script>
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!----//End-top-nav-script---->
@@ -83,10 +83,10 @@
         <h4 class="modal-title" style="color:#7A7A7A">Group Name</h4>
       </div>
       <div class="modal-body">
-      <p style="margin-top: 20px" ng-show="groupCreated"> {{message}} </p>
+      <p style="margin-top: 20px" ng-show="groupCreated">{{message}} </p>
         <form>
-  <div class="form-group" ng-hide="groupCreated"><br>
-    <label for="exampleInputEmail1"></label>
+  <div class="form-group" ng-hide="groupCreated">{{message}}<br>
+    <label for="exampleInputEmail1" ng-hide="groupCreated"></label>
     <input class="form-control" id="groupName" ng-model="groupName" placeholder="foodcheezus lovers" style="width:50%">
   </div><br><br>
   <button ng-click="makeRoom()" class="btn btn-default" ng-hide="groupCreated">Make a group</button>
@@ -115,9 +115,7 @@
     <input class="form-control" id="groupName" placeholder="eg. 928" style="width:50%" ng-model="joinGroupNum">
   </div><br><br>
   <button class="btn btn-default" ng-click="joinGroup()">Join a group</button>
-</form>
->>>>>>> af383b64eb13dcdb4f893a618e7cbbbc081fcaaa
-      </div>
+</form>      </div>
     </div>
 
   </body>
