@@ -36,12 +36,12 @@ router.post('/', function(req, res, next) {
 	res.json({"roomNumber":roomNumber});
 });
 
-router.get('/:id/info', function(req, res) {
+router.get('/:id/results', function(req, res) {
 	var id = req.params.id;
 	Room.getRoomById(id, function(result) {
 		if (result.code === 200) {
 			var room = result.data;
-			res.render('room', {
+			res.render('rooms', {
 				title: room.name,
 				room: room
 			})
@@ -50,6 +50,10 @@ router.get('/:id/info', function(req, res) {
 		}
 	});
 });
+
+
+
+
 
 router.post('/:id', function(req, res) {
 	console.log(req.body);
