@@ -38,7 +38,7 @@ controller('preferences', function($scope, $http, $location) {
     "allergies":[],
     "prices": [],
     "name": "",
-    "roomNumber": $location.absUrl().split('/')[4]
+    "roomNumber": $('body').data('id')
   };
   console.log($scope.userPreferences);
   $scope.counter = 0;
@@ -59,14 +59,15 @@ controller('preferences', function($scope, $http, $location) {
       $(":checked").each(function(i, val){
         $scope.userPreferences["prices"].push(val.id);
       });
-      //POST to the aggregator, needs to receive a response
-      //and redirect window location
-      $http.post('/postTest', $scope.userPreferences).
-      success(function(data, status, headers, config) {
-        console.log(data);
-    }).
-      error(function(data, status, headers, config) {
-        console.log(data);
+
+      $.ajax({
+          url: '/rooms/' + $('body').data('id'),
+          type: "POST",
+          data: $scope.userPreferences,
+          dataType: "json",
+          success: function(response) {
+            window.location.href = "/rooms/"+$scope.userPreferences.roomNumber + "/info";
+          }
       });
     }
     else {

@@ -4,7 +4,7 @@ var ObjectId = Schema.ObjectId;
 
 var roomSchema = new Schema({
     roomNumber: Number,
-    cuisines: [],
+    cuisines: [String],
     prices: [],
     allergies: [],
     members: [],
@@ -14,6 +14,45 @@ var roomSchema = new Schema({
 roomSchema.statics.getRooms = function(callback) {
     Room.find({}, function(err, rooms){
         callback(rooms);
+    });
+};
+
+roomSchema.statics.getRoomByName = function(name, callback) {
+    Room.findOne({name:name}, function(err, room) {
+        if (err) {
+            callback({code: 500, err: 'Unknown error'});
+        } else if (room) {
+            callback({code: 200, data: room});
+        }
+    });
+};
+
+roomSchema.statics.getRoomById = function(id, callback) {
+    Room.findOne({roomNumber: id}, function(err, room) {
+        if (err) {
+            callback({code: 500, err: 'Unknown error'});
+        } else if (room) {
+            callback({code: 200, data: room});
+        }
+    })
+};
+
+roomSchema.statics.addPreferences = function(id, username, cuisines, prices, callback) {
+    Room.findOne({roomNumber:id}, function(err, room) {
+        if (err) {
+            callback({code: 500, err: 'Unknown error'});
+        } else if (room) {
+            room["members"].push(username);
+            room["cuisines"] = room["cuisines"].concat(cuisines);
+            room["prices"] = room["prices"].concat(prices);
+            room.save(function(err, result) {
+                if (err) {
+                    callback({code: 500, err: 'Could not update preferences'});
+                } else {
+                    callback({code: 200, data: result});
+                }
+            });
+        }
     });
 };
 
