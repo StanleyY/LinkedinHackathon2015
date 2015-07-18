@@ -114,9 +114,10 @@
           <span class="fs-display-1 display-block tc-white-1" style="text-align: center;"> suggestions from food cheezus to you </span>
           <span class="fs-body display-block tc-white-2" style="text-align: center;"> food cheezus is always right </span>
           <br>
+            <span ng-hide="loaded" class="fs-title display-block tc-white-1" style="text-align: center;"> finding the best restaurants for you... </span>
 
             <div ng-repeat="restaurant in restaurants" flex-item>
-              <div class="card">
+              <div class="card ng-cloak">
                   <div flex-container="row">
                       <div class="card__img card__img--left" style="height: 160px">
                           <a href="{{restaurant.yelpUrl}}"><img src="{{restaurant.imgUrl}}"></a>
@@ -137,6 +138,7 @@
 
                                   <span> <span class="tc-red-900"><b> rating: </b></span> {{ restaurant.rating }} stars</span>
                                   <span class="tc-red-900"><b> address: </b></span> <span ng-repeat="addressLine in restaurant.address"> {{ addressLine }} </span>
+                                  <span> <span class="tc-red-900"><b> score: </b></span> {{ restaurant.score }} </span>
 
                               </div>
 
