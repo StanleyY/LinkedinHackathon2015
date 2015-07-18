@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+  </script>
+  <script>
+    function makeSearch(){
+      $.get('/test');
+    };
+  </script>
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -8,4 +15,5 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
   </body>
+  <button onclick="makeSearch();">Test</button>
 </html>
